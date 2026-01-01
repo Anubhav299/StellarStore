@@ -33,7 +33,7 @@
         toast.success("Product added successfully");
         document.getElementById("add_product_modal").close();
       } catch (error) {
-        console.log("Error in addProduct function.", error);
+        console.error("Error in addProduct function.", error);
         toast.error("Failed to add product.");
       } finally {
         set({ loading: false });
@@ -45,8 +45,8 @@
       try {
         const response = await axios.get(`${BASE_URL}/api/products`);
         set({ products: response.data.data, error: null }); //first data from axios, second data from our API(see)
-      } catch (err) {
-        if (err.status === 429)
+      } catch (error) {
+        if (error.status === 429)
           set({ error: "Rate Limit Exceeded.", products: [] });
         else set({ error: "Something else went wrong.", products: [] });
       } finally {
@@ -62,8 +62,8 @@
           products: prev.products.filter((product) => product.id !== id),
         }));
         toast.success("Product deleted successfully.");
-      } catch (err) {
-        console.log("Error in deleteProduct function", err);
+      } catch (error) {
+        console.error("Error in deleteProduct function", error);
         toast.error("Something went wrong.");
       } finally {
         set({ loading: false });
@@ -80,7 +80,7 @@
           error: null,
         });
       } catch (error) {
-        console.log("Error in fetchProduct function", error);
+        console.error("Error in fetchProduct function", error);
         set({ error: "Something went wrong.", currentProduct: null });
       } finally {
         set({ loading: false });
@@ -99,7 +99,7 @@
         toast.success("Product updated successfully");
       } catch (error) {
         toast.error("Something went wrong");
-        console.log("Error in updateProduct function", error);
+        console.error("Error in updateProduct function", error);
       } finally {
         set({ loading: false });
       }

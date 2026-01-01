@@ -7,10 +7,9 @@ export const getProducts = async (req, res) => {
         ORDER BY created_at DESC
         `;
 
-    console.log("Fetched Products", products);
     res.status(200).json({ success: true, data: products });
   } catch (error) {
-    console.log("Error in getProducts function", error);
+    console.error("Error in getProducts function", error);
     res.status(500).json({ success: false, message: "Internal Server Error." });
   }
 };
@@ -31,10 +30,9 @@ export const createProduct = async (req, res) => {
         VALUES (${name}, ${image}, ${price})
         RETURNING *
         `;
-    console.log("New Product added.", newProduct);
     res.status(201).json({ success: true, data: newProduct[0] });
   } catch (error) {
-    console.log("Error in createProduct function", error);
+    console.error("Error in createProduct function", error);
     res.status(500).json({ success: false, message: "Internal Server Error." });
   }
 };
@@ -48,7 +46,7 @@ export const getProduct = async (req, res) => {
       `;
     res.status(200).json({ success: true, data: product[0] });
   } catch (error) {
-    console.log("Error in getProduct function", error);
+    console.error("Error in getProduct function", error);
     res.status(500).json({ success: false, message: "Internal Server Error." });
   }
 };
@@ -71,7 +69,7 @@ export const updateProduct = async (req, res) => {
     }
     res.status(200).json({ success: true, data: updatedProduct[0] });
   } catch (error) {
-    console.log("Error in updateProduct function", error);
+    console.error("Error in updateProduct function", error);
     res.status(500).json({ success: false, message: "Internal Server Error." });
   }
 };
@@ -91,7 +89,7 @@ export const deleteProduct = async (req, res) => {
     }
     res.status(200).json({ success: true, data: deletedProduct[0] });
   } catch (error) {
-    console.log("Error in deleteProduct function", error);
+    console.error("Error in deleteProduct function", error);
     res.status(500).json({ success: false, message: "Internal Server Error." });
   }
 };

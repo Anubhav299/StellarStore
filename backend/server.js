@@ -12,8 +12,6 @@ import { aj } from "./lib/arcjet.js";
 
 // Load environment variables
 dotenv.config();
-console.log("Running in NODE_ENV =", process.env.NODE_ENV);
-
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -63,7 +61,7 @@ app.use(async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.log("Arcjet error", error);
+    console.error("Arcjet error", error);
     next(error);
   }
 });
@@ -95,7 +93,7 @@ async function initDB() {
     `;
     console.log("Database initialized successfully");
   } catch (error) {
-    console.log("Error initDB", error);
+    console.error("Error initDB", error);
   }
 }
 
