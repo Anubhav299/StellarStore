@@ -1,15 +1,17 @@
-import { Link, useLocation } from "react-router-dom";
+import React from "react";
+import { Link, useResolvedPath } from "react-router-dom";
 import { ShoppingBagIcon, ShoppingCartIcon } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
-import useProductStore from "../store/useProductStore";
+import { useProductStore } from "../store/useProductStore"; // 1. Import the store
 
 function NavBar() {
-  const { pathname } = useLocation();
+  const { pathname } = useResolvedPath();
   const isHomePage = pathname === "/";
+  
+  // 2. Get the products array from your store
+  const { products } = useProductStore(); 
 
-  const { products } = useProductStore();
-
-  return (
+  return ( 
     <div className="bg-base-100/80 backdrop-blur-lg border-b border-base-content/10 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto">
         <div className="navbar px-4 min-h-[4rem] justify-between">
@@ -37,7 +39,8 @@ function NavBar() {
                 <div className="p-2 rounded-full hover:bg-base-200 transition-colors">
                   <ShoppingBagIcon className="size-5" />
                   <span className="badge badge-sm badge-primary indicator-item">
-                    {products.length}
+                    {/* 3. Replace static 8 with products.length */}
+                    {products.length} 
                   </span>
                 </div>
               </div>
