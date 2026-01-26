@@ -29,7 +29,7 @@ app.use(cors());
 app.use(
   helmet({
     contentSecurityPolicy: false,
-  })
+  }),
 );
 app.use(morgan("dev"));
 
@@ -53,7 +53,7 @@ app.use(async (req, res, next) => {
     // check for spoofed bots
     if (
       decision.results.some(
-        (result) => result.reason.isBot() && result.reason.isSpoofed()
+        (result) => result.reason.isBot() && result.reason.isSpoofed(),
       )
     ) {
       return res.status(403).json({ error: "Spoofed bot detected" });
